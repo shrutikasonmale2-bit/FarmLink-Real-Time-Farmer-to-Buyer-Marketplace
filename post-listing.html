@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmLink - Post Listing</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7f2;
+            color: #222;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .topbar {
+            width: 100%;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 7%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .brand {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .menu a:hover {
+            color: #2e7d32;
+        }
+
+        .cta {
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white !important;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            min-height: 75vh;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 650px;
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .auth-card h2 {
+            text-align: center;
+            color: #1b5e20;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .muted {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* ================= FORM ================= */
+
+        form label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #2e7d32;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #1b5e20;
+        }
+
+        .btn.outline {
+            background: white;
+            color: #2e7d32;
+            border: 1px solid #2e7d32;
+        }
+
+        .btn.outline:hover {
+            background: #e8f5e9;
+        }
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            background: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 768px) {
+
+            .topbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .menu {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .row {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="topbar">
+
+        <div class="brand">
+            🌱 FarmLink
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="marketplace.html">
+                Marketplace
+            </a>
+
+            <a href="post-listing.html">
+                Post Listing
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="developers.html">
+                Developers
+            </a>
+
+            <a href="login.html" class="cta">
+                Login / Register
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="container">
+
+        <section class="auth-card">
+
+            <h2>
+                Post Your Listing
+            </h2>
+
+            <p class="muted">
+                Sell your fresh agricultural products directly to buyers.
+            </p>
+
+
+            <!-- IMPORTANT: ID MUST BE productForm -->
+
+            <form id="productForm">
+
+
+                <!-- PRODUCT NAME -->
+
+                <label for="productName">
+                    Product Name
+                </label>
+
+                <input
+                    type="text"
+                    id="productName"
+                    placeholder="e.g. Fresh Tomatoes"
+                    required
+                >
+
+
+                <!-- CATEGORY -->
+
+                <label for="productCategory">
+                    Category
+                </label>
+
+                <select
+                    id="productCategory"
+                    required
+                >
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="Vegetables">
+                        Vegetables
+                    </option>
+
+                    <option value="Fruits">
+                        Fruits
+                    </option>
+
+                    <option value="Grains">
+                        Grains
+                    </option>
+
+                    <option value="Dairy">
+                        Dairy
+                    </option>
+
+                    <option value="Organic">
+                        Organic
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+
+                <!-- PRICE -->
+
+                <label for="productPrice">
+                    Price
+                </label>
+
+                <input
+                    type="number"
+                    id="productPrice"
+                    placeholder="Enter price"
+                    min="0"
+                    required
+                >
+
+
+                <!-- QUANTITY -->
+
+                <label for="productQuantity">
+                    Quantity
+                </label>
+
+                <input
+                    type="number"
+                    id="productQuantity"
+                    placeholder="e.g. 100"
+                    min="1"
+                    required
+                >
+
+
+                <!-- LOCATION -->
+
+                <label for="productLocation">
+                    Location
+                </label>
+
+                <input
+                    type="text"
+                    id="productLocation"
+                    placeholder="e.g. Satara, Maharashtra"
+                    required
+                >
+
+
+                <!-- DESCRIPTION -->
+
+                <label for="productDescription">
+                    Product Description
+                </label>
+
+                <textarea
+                    id="productDescription"
+                    rows="5"
+                    placeholder="Describe your product..."
+                    required
+                ></textarea>
+
+
+                <!-- IMAGE URL -->
+
+                <label for="productImage">
+                    Product Image URL
+                    <small>(Optional)</small>
+                </label>
+
+                <input
+                    type="url"
+                    id="productImage"
+                    placeholder="Paste image URL"
+                >
+
+
+                <!-- BUTTONS -->
+
+                <div class="row">
+
+                    <button
+                        type="submit"
+                        class="btn"
+                    >
+                        Publish Listing
+                    </button>
+
+
+                    <a
+                        href="marketplace.html"
+                        class="btn outline"
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        © 2026 FarmLink.
+        Connecting Farmers Directly With Buyers.
+        Developed by Shrutika Sonmale
+
+    </footer>
+
+
+    <!-- ================= SHARED JAVASCRIPT ================= -->
+
+    <script
+        type="module"
+        src="js/app.js">
+    </script>
+
+</body>
+
+</html>

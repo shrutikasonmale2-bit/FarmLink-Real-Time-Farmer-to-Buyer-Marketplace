@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>FarmLink - Marketplace</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        .marketplace-container {
+
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 50px 20px;
+
+        }
+
+
+        .marketplace-header {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .marketplace-header h2 {
+
+            color: #1b5e20;
+
+            font-size: 32px;
+
+        }
+
+
+        .filter-box {
+
+            background: white;
+
+            padding: 20px;
+
+            border-radius: 14px;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+
+            display: flex;
+
+            gap: 15px;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .filter-box input,
+
+        .filter-box select {
+
+            flex: 1;
+
+            padding: 13px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+        }
+
+
+        .product-grid {
+
+            display: grid;
+
+            grid-template-columns:
+
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 25px;
+
+        }
+
+
+        .product-card {
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 16px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+
+            transition: 0.3s;
+
+        }
+
+
+        .product-card:hover {
+
+            transform: translateY(-5px);
+
+        }
+
+
+        .product-card h3 {
+
+            color: #1b5e20;
+
+            font-size: 24px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .product-card p {
+
+            margin: 10px 0;
+
+            color: #555;
+
+        }
+
+
+        .product-card .price {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #2e7d32;
+
+        }
+
+
+        .product-card button {
+
+            width: 100%;
+
+            margin-top: 15px;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2e7d32;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .product-card button:hover {
+
+            background: #1b5e20;
+
+        }
+        /* DELETE PRODUCT BUTTON */
+
+        .product-card .delete-product-btn {
+
+           background: #dc2626;
+
+           color: white;
+
+           margin-top: 10px;
+
+}
+
+
+.product-card .delete-product-btn:hover {
+
+    background: #b91c1c;
+
+}
+
+
+        .no-products {
+
+            text-align: center;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 15px;
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        /* MODAL */
+
+        .modal {
+
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.55);
+
+            align-items: center;
+
+            justify-content: center;
+
+            z-index: 2000;
+
+            padding: 20px;
+
+        }
+
+
+        .modal-content {
+
+            background: white;
+
+            width: 100%;
+
+            max-width: 500px;
+
+            padding: 30px;
+
+            border-radius: 18px;
+
+            position: relative;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+        }
+
+
+        .close-modal {
+
+            position: absolute;
+
+            top: 12px;
+
+            right: 18px;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+        }
+
+
+        .modal-content h2 {
+
+            color: #1b5e20;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .modal-content input,
+
+        .modal-content textarea {
+
+            width: 100%;
+
+            padding: 12px;
+
+            margin: 8px 0 15px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+        }
+
+
+        .modal-content button {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2e7d32;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .filter-box {
+
+                flex-direction: column;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            🌱 FarmLink
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="index.html">
+
+                Home
+
+            </a>
+
+
+            <a href="marketplace.html">
+
+                Marketplace
+
+            </a>
+
+
+            <a href="post-listing.html">
+
+                Post Listing
+
+            </a>
+
+
+            <a href="profile.html">
+
+                Profile
+
+            </a>
+
+
+            <a href="developers.html">
+
+                Developers
+
+            </a>
+
+
+            <a href="login.html" class="cta">
+
+                Login / Register
+
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="marketplace-container">
+
+
+        <div class="marketplace-header">
+
+            <h2>
+
+                Fresh From Farmers 🌱
+
+            </h2>
+
+
+            <p>
+
+                Discover fresh agricultural products
+
+                directly from local farmers.
+
+            </p>
+
+        </div>
+
+
+        <!-- SEARCH AND FILTER -->
+
+        <div class="filter-box">
+
+
+            <input
+
+                type="text"
+
+                id="searchInput"
+
+                placeholder="Search products or location..."
+
+            >
+
+
+            <select id="categoryFilter">
+
+
+                <option value="all">
+
+                    All Categories
+
+                </option>
+
+
+                <option value="Vegetables">
+
+                    Vegetables
+
+                </option>
+
+
+                <option value="Fruits">
+
+                    Fruits
+
+                </option>
+
+
+                <option value="Grains">
+
+                    Grains
+
+                </option>
+
+
+                <option value="Dairy">
+
+                    Dairy
+
+                </option>
+
+
+                <option value="Organic">
+
+                    Organic
+
+                </option>
+
+
+                <option value="Other">
+
+                    Other
+
+                </option>
+
+
+            </select>
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div id="marketplaceStatus"></div>
+
+
+        <!-- IMPORTANT ID -->
+
+        <div
+
+            id="productGrid"
+
+            class="product-grid"
+
+        >
+
+            <div class="no-products">
+
+                Loading products...
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- PRODUCT DETAILS MODAL -->
+
+    <div
+
+        id="productModal"
+
+        class="modal"
+
+    >
+
+
+        <div class="modal-content">
+
+
+            <span
+
+                id="closeProductModal"
+
+                class="close-modal"
+
+            >
+
+                &times;
+
+            </span>
+
+
+            <h2 id="modalProductName">
+
+                Product Details
+
+            </h2>
+
+
+            <p>
+
+                <strong>Category:</strong>
+
+                <span id="modalCategory"></span>
+
+            </p>
+
+
+            <p>
+
+                <strong>Price:</strong>
+
+                ₹<span id="modalPrice"></span>
+
+            </p>
+
+
+            <p>
+
+                <strong>Quantity:</strong>
+
+                <span id="modalQuantity"></span>
+
+            </p>
+
+
+            <p>
+
+                <strong>Location:</strong>
+
+                <span id="modalLocation"></span>
+
+            </p>
+
+
+            <p>
+
+                <strong>Description:</strong>
+
+                <span id="modalDescription"></span>
+
+            </p>
+
+
+            <p>
+
+                <strong>Farmer:</strong>
+
+                <span id="modalSeller"></span>
+
+            </p>
+
+
+            <button
+
+                id="placeOrderBtn"
+
+            >
+
+                Place Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ORDER MODAL -->
+
+    <div
+
+        id="orderModal"
+
+        class="modal"
+
+    >
+
+
+        <div class="modal-content">
+
+
+            <span
+
+                id="closeOrderModal"
+
+                class="close-modal"
+
+            >
+
+                &times;
+
+            </span>
+
+
+            <h2>
+
+                Place Order
+
+            </h2>
+
+
+            <h3 id="orderProductName"></h3>
+
+
+            <p>
+
+                Price:
+
+                ₹<span id="orderProductPrice"></span>
+
+            </p>
+
+
+            <label>
+
+                Quantity
+
+            </label>
+
+
+            <input
+
+                type="number"
+
+                id="orderQuantity"
+
+                min="1"
+
+                value="1"
+
+            >
+
+
+            <label>
+
+                Delivery Address
+
+            </label>
+
+
+            <textarea
+
+                id="deliveryAddress"
+
+                placeholder="Enter complete delivery address"
+
+            ></textarea>
+
+
+            <button
+
+                id="confirmOrderBtn"
+
+            >
+
+                Confirm Order
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2026 FarmLink.
+
+        Connecting Farmers Directly With Buyers.
+
+        <br><br>
+
+        Developed by
+
+        <strong>Shrutika Sonmale</strong>
+
+    </footer>
+
+
+    <!-- APP.JS -->
+
+    <script
+
+        type="module"
+
+        src="js/app.js"
+
+    ></script>
+
+
+</body>
+
+</html>
